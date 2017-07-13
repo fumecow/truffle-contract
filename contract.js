@@ -375,7 +375,13 @@ var contract = (function(module) {
           };
 
           args.push(tx_params, intermediary);
-          contract_class.new.apply(contract_class, args);
+          contract_class.new.apply(contract_class, args, function(err, res) {
+            if (!err) {
+              accept(res);
+            } else {
+              reject(err);
+            }
+          });
         });
       });
     },
